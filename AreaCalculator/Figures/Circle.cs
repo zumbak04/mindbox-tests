@@ -24,10 +24,10 @@ namespace AreaCalculator.Figures
         private float Radius { get; }
         #endregion
 
-        #region Private Methods
-        protected override double GetArea()
+        #region Public Methods
+        public override double GetArea()
         {
-            return Math.PI * Math.Sqrt(Radius);
+            return Math.PI * Math.Pow(Radius, 2);
         }
         #endregion
     }

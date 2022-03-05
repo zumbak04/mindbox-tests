@@ -2,8 +2,8 @@
 {
     public abstract class Figure
     {
-        #region Private Methods
-        protected abstract double GetArea();
+        #region Public Methods
+        public abstract double GetArea();
 
         #endregion
     }

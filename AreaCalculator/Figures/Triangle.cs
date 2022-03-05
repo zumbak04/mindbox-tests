@@ -17,6 +17,7 @@ namespace AreaCalculator.Figures
                 throw new ArgumentOutOfRangeException("Одна из сторон отрицательная");
             }
 
+            Sides = new double[3];
             Sides[0] = a;
             Sides[1] = b;
             Sides[2] = c;
@@ -27,32 +28,17 @@ namespace AreaCalculator.Figures
         public double[] Sides { get; }
         #endregion
 
-        #region Private Methods
-        protected override double GetArea()
+        #region Public Methods
+        public override double GetArea()
         {
-            return Sides.Sum() / 2;
+            double semiPer = Sides.Sum() / 2;
+            return Math.Sqrt(semiPer * (semiPer - Sides[0]) * (semiPer - Sides[1]) * (semiPer - Sides[2]));
         }
-        protected bool IsRightTriangle()
+        public bool IsRightTriangle()
         {
-            int longestSideIndex = 0;
-            for(int i = 0; i < Sides.Length; i++)
-            {
-                if(Sides[i] > Sides[longestSideIndex])
-                {
-                    longestSideIndex = i;
-                }
-            }
+            Array.Sort(Sides);
 
-            double longestSqr = Math.Sqrt(Sides[longestSideIndex]);
-            double otherSqrs = 0;
-            for(int i = 0; i < Sides.Length; i++)
-            {
-                if (i != longestSideIndex)
-                {
-                    otherSqrs += Math.Sqrt(Sides[i]);
-                }
-            }
-            return longestSqr == otherSqrs;
+            return Math.Pow(Sides[0], 2) + Math.Pow(Sides[1], 2) == Math.Pow(Sides[2], 2);
         }
         #endregion
     }
